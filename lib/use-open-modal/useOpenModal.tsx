@@ -1,4 +1,4 @@
-import { Divider, Modal, ModalProps } from "antd";
+import { Modal, ModalProps } from "antd";
 import { cloneElement, useContext, useRef, useState } from "react";
 import { UseOpenModalContext } from "./context";
 import { UseOpenModalProps } from "./types";
@@ -58,23 +58,20 @@ const useOpenModal: UseOpenModalType = () => {
             }}
             afterClose={destroy}
           >
-            <div>
-              <Divider />
-              {cloneElement(openElement, {
-                ...openElement.props,
-                onSuccess: (result: any) => {
-                  close();
-                  resolve(result);
-                },
-                onError: (error: any) => {
-                  close();
-                  reject(error);
-                },
-                onCancel: () => {
-                  close();
-                },
-              })}
-            </div>
+            {cloneElement(openElement, {
+              ...openElement.props,
+              onSuccess: (result: any) => {
+                close();
+                resolve(result);
+              },
+              onError: (error: any) => {
+                close();
+                reject(error);
+              },
+              onCancel: () => {
+                close();
+              },
+            })}
           </Modal>
         );
       };
