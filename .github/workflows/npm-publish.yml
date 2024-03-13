@@ -28,5 +28,5 @@ jobs:
         shell: bash
         run: pnpm publish --access public --no-git-checks && echo "%NODE_AUTH_TOKEN%"
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
