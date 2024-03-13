@@ -1,3 +1,5 @@
+import { ElementType } from "react";
+
 export type UseOpenModalProps = {
   onSuccess?: (result?: any) => void;
   onError?: (error?: any) => void;
