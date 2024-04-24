@@ -67,6 +67,7 @@ const useOpenModal: UseOpenModalType = () => {
               mask: {
                 pointerEvents: !draggable ? "auto" : "none",
               },
+              ...modalOptions?.styles,
             }}
             title={
               draggable ? (
