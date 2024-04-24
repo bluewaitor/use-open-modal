@@ -32,6 +32,7 @@ function App() {
   const openModal = useCallback(() => {
     open(<div>弹窗内容</div>, {
       title: "弹窗标题",
+      draggable: true, // 支持拖拽
     });
   }, []);
 
