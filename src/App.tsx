@@ -10,6 +10,7 @@ function App() {
     open(<div>弹窗内容</div>, {
       title: "弹窗标题",
       draggable: true,
+      mask: false,
     });
   }, []);
 
