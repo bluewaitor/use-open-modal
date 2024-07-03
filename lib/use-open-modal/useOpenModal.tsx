@@ -48,8 +48,8 @@ const useOpenModal: UseOpenModalType = () => {
         const draggable = modalOptions?.draggable;
 
         const close = () => {
-          setVisible(false);
           afterClose();
+          setVisible(false);
         };
 
         const destroy = () => {

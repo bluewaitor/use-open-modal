@@ -7,11 +7,22 @@ function App() {
   const { open } = useOpenModal();
 
   const openModal = useCallback(() => {
-    open(<div>弹窗内容</div>, {
-      title: "弹窗标题",
-      draggable: true,
-      mask: false,
-    });
+    open(
+      <div>弹窗内容</div>,
+      {
+        title: "弹窗标题",
+        draggable: true,
+        mask: false,
+      },
+      {
+        beforeClose: async () => {
+          console.log("111");
+        },
+        afterClose: async () => {
+          console.log("222");
+        },
+      }
+    );
   }, []);
 
   return (
