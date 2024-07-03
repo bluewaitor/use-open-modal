@@ -9,6 +9,7 @@ type IOpen<ModalOptions extends any> = (
   modalOptions?: ModalOptions,
   additionalOptions?: {
     beforeClose?: () => Promise<void>;
+    afterClose?: () => Promise<void>;
   }
 ) => Promise<any>;
 
@@ -20,6 +21,7 @@ type UseAntdOpenModal<ModalOptions = any> = () => {
 
 const defaultOption = {};
 const defaultBeforeClose = () => Promise.resolve();
+const defaultAfterClose = () => Promise.resolve();
 
 type UseOpenModalType = UseAntdOpenModal<
   ModalProps & {
@@ -35,7 +37,10 @@ const useOpenModal: UseOpenModalType = () => {
   const openModal: ReturnType<UseOpenModalType>["open"] = (
     openElement,
     modalOptions,
-    { beforeClose = defaultBeforeClose } = defaultOption
+    {
+      beforeClose = defaultBeforeClose,
+      afterClose = defaultAfterClose,
+    } = defaultOption
   ) => {
     return new Promise<any>((resolve, reject) => {
       const Element = () => {
@@ -44,6 +49,7 @@ const useOpenModal: UseOpenModalType = () => {
 
         const close = () => {
           setVisible(false);
+          afterClose();
         };
 
         const destroy = () => {
