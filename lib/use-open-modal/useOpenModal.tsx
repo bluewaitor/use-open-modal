@@ -53,6 +53,7 @@ const useOpenModal: UseOpenModalType = () => {
         };
 
         const destroy = () => {
+          modalOptions?.afterClose?.();
           remove(id);
         };
 
@@ -63,7 +64,8 @@ const useOpenModal: UseOpenModalType = () => {
             {...modalOptions}
             open={visible}
             destroyOnClose={true}
-            onCancel={() => {
+            onCancel={(e) => {
+              modalOptions?.onCancel?.(e);
               beforeClose().then(() => {
                 close();
               });
