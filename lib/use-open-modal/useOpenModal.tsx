@@ -1,11 +1,17 @@
 import { Modal, ModalProps } from "antd";
-import { cloneElement, useContext, useRef, useState } from "react";
+import {
+  cloneElement,
+  useContext,
+  useRef,
+  useState,
+  type ReactElement,
+} from "react";
 import ModalDrag from "./ModalDrag";
 import { UseOpenModalContext } from "./context";
 import { UseOpenModalProps } from "./types";
 
 type IOpen<ModalOptions extends any> = (
-  openElement: React.ReactElement & UseOpenModalProps,
+  openElement: ReactElement<UseOpenModalProps>,
   modalOptions?: ModalOptions,
   additionalOptions?: {
     beforeClose?: () => Promise<void>;
@@ -32,7 +38,7 @@ type UseOpenModalType = UseAntdOpenModal<
 const useOpenModal: UseOpenModalType = () => {
   const { add, remove, removeAll } = useContext(UseOpenModalContext);
 
-  const currentId = useRef<number>();
+  const currentId = useRef<number>(0);
 
   const openModal: ReturnType<UseOpenModalType>["open"] = (
     openElement,
@@ -63,7 +69,7 @@ const useOpenModal: UseOpenModalType = () => {
             maskClosable={false}
             {...modalOptions}
             open={visible}
-            destroyOnClose={true}
+            destroyOnHidden={true}
             onCancel={(e) => {
               modalOptions?.onCancel?.(e);
               beforeClose().then(() => {
